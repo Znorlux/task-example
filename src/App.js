@@ -1,25 +1,26 @@
 import logo from './logo.svg';
 import './App.css';
+import React, { useState } from 'react';
+import TaskItem from './components/TaskItem';
+import TaskForm from './components/TaskForm';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [tasks, setTasks] = useState([]);
+
+    // Función para agregar una nueva tarea
+    const addTask = (newTask) => {
+        setTasks([...tasks, newTask]);
+    };
+
+    return (
+        <div>
+            <h2>Lista de Tareas</h2>
+            {tasks.map((task, index) => ( 
+                <TaskItem key={index} task={task} /> 
+            ))}
+            <TaskForm onAddTask={addTask} />
+        </div>
+    );
 }
 
 export default App;
